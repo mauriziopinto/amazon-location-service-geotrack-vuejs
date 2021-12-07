@@ -8,7 +8,7 @@ Globals:
     Handler: index.handler
     MemorySize: 256
     Runtime: python3.8
-    Timeout: 120
+    Timeout: 180
     Tracing: Active    
   
 Parameters:
@@ -152,6 +152,7 @@ Resources:
     Properties:
       FunctionName: !Sub "${ProjectName}-${EnvironmentName}-PushVehiclePosition"
       CodeUri: ./lambdas/simulation/pushVehiclePosition
+      Timeout: 600
       Policies:
         - arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess
         - SSMParameterReadPolicy:
@@ -180,7 +181,7 @@ Resources:
   PinpointProject:
     Type: AWS::Pinpoint::App
     Properties: 
-      Name: BlogApplication
+      Name: !Sub "${ProjectName}-${EnvironmentName}-Pinpoint"
   PinpointSMSChannel:
     Type: AWS::Pinpoint::SMSChannel
     Properties: 

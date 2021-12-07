@@ -8,6 +8,7 @@ logger.setLevel(logging.INFO)
 
 project_name = os.getenv('PROJECT_NAME')
 project_env = os.getenv('PROJECT_ENV')
+trackerName = os.getenv('TRACKER')
 location = boto3.client('location')
 ssm = boto3.client('ssm')
 
@@ -28,9 +29,6 @@ def GetSsmParam(paramKey, isEncrypted):
         return ""
 
 def handler(event, context):      
-
-    ssmParam = "/amplify/" + project_name + "/tracker"
-    trackerName = GetSsmParam(ssmParam, False)
 
     response = location.batch_update_device_position(
         TrackerName=trackerName,

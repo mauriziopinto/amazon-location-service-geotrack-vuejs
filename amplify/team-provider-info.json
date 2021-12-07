@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-geotrack-dev-165613-authRole",
+      "UnauthRoleArn": "arn:aws:iam::514046899996:role/amplify-geotrack-dev-165613-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::514046899996:role/amplify-geotrack-dev-165613-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-geotrack-dev-165613-deployment",
+      "UnauthRoleName": "amplify-geotrack-dev-165613-unauthRole",
+      "StackName": "amplify-geotrack-dev-165613",
+      "StackId": "arn:aws:cloudformation:us-west-2:514046899996:stack/amplify-geotrack-dev-165613/fc58c470-549c-11ec-a1ab-0653404d8ecb",
+      "AmplifyAppId": "daw2xyprinp0z"
+    },
+    "categories": {
+      "auth": {
+        "geotrack733e9fa8": {}
+      }
+    }
+  }
+}

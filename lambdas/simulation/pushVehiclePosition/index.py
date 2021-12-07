@@ -17,6 +17,7 @@ logger.setLevel(logging.INFO)
 iot_topic = os.getenv('IOT_TOPIC')
 project_name = os.getenv('PROJECT_NAME')
 project_env = os.getenv('PROJECT_ENV')
+routeName = os.getenv('ROUTE_NAME')
 
 location = boto3.client('location')
 iot = boto3.client('iot-data')
@@ -40,9 +41,6 @@ def GetSsmParam(paramKey, isEncrypted):
         return ""
 
 def route_calculation(departure, destination):
-
-    ssmParam = "/amplify/" + project_name + "/route"
-    routeName = GetSsmParam(ssmParam, False)
 
     return location.calculate_route(
     CalculatorName=routeName,
@@ -98,20 +96,21 @@ def handler(event, context):
     route = route_calculation(event['geoStart'],event['geoEnd'])
     if 'Legs' in route:
         for step in route['Legs'][0]['Steps']:
-            if step['DurationSeconds'] >= 200:
-                div=10
+            if step['DurationSeconds'] >= 1000:
+                div=100
+            elif step['DurationSeconds'] < 1000 and step['DurationSeconds'] >= 500:
+                div=50
+            elif step['DurationSeconds'] < 500 and step['DurationSeconds'] >= 200:
+                div=20
             elif step['DurationSeconds'] < 200 and step['DurationSeconds'] >= 100:
                 div=6
             else:
                 div=4
             
-            logger.info("Sleeping: " + str(round(step['DurationSeconds']/div)) + " sec")
-            sleep(round(step['DurationSeconds']/div))
+            logger.info("StartPosition: " + str(step['StartPosition']) + " EndPosition: " + str(step['EndPosition']))
             publish_location(event['id'], event['deliveryAgent']['device']['id'], step['StartPosition'])
             logger.info("Sleeping: " + str(round(step['DurationSeconds']/div)) + " sec")
-            sleep(round(step['DurationSeconds']/div))
-            publish_location(event['id'], event['deliveryAgent']['device']['id'], step['EndPosition'])
-    
+            sleep(round(step['DurationSeconds']/div))  
 
     response = {
         'statusCode': 200,

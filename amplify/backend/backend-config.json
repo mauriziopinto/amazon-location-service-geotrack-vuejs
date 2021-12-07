@@ -1,10 +1,32 @@
 {
   "auth": {
-    "geotrack6cb2c7266cb2c726": {
+    "geotrack733e9fa8": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
-      "customAuth": false
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "signupAttributes": [
+          "EMAIL",
+          "FAMILY_NAME",
+          "GIVEN_NAME"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      }
     }
   },
   "api": {
@@ -16,7 +38,7 @@
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {
-              "userPoolId": "authgeotrack6cb2c7266cb2c726"
+              "userPoolId": "authgeotrack733e9fa8"
             }
           },
           "additionalAuthenticationProviders": [
@@ -28,22 +50,34 @@
       }
     }
   },
-  "amzlocation": {
-    "geotrack": {
-      "service": "Location",
-      "providerPlugin": "awscloudformation"
+  "custom": {
+    "geoCustomApi": {
+      "service": "customCDK",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "geotrack733e9fa8",
+          "attributes": [
+            "IdentityPoolId",
+            "IdentityPoolName",
+            "UserPoolId",
+            "UserPoolArn",
+            "UserPoolName",
+            "AppClientIDWeb",
+            "AppClientID"
+          ]
+        },
+        {
+          "category": "api",
+          "resourceName": "geotrack",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ]
+        }
+      ]
     }
   },
-  "ssmparam": {
-    "geotrack": {
-      "service": "Ssm",
-      "providerPlugin": "awscloudformation"
-    }
-  },
-  "restapi": {
-    "geotrack": {
-      "service": "ApiGateway",
-      "providerPlugin": "awscloudformation"
-    }
-  }
+  "function": {}
 }

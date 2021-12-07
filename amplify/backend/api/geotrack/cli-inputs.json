@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "geotrack",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "/Users/artrodri/github/aws/amazon-location-service-geotrack-vuejs/amplify/backend/api/geotrack/schema.graphql",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authgeotrack733e9fa8"
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "AWS_IAM"
+      }
+    ],
+    "conflictResolution": {}
+  }
+}

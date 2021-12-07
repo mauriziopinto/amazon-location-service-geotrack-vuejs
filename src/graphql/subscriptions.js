@@ -7,17 +7,16 @@ export const onCreateDeliveryAgent = /* GraphQL */ `
       id
       fullName
       deliveryType
-      createdAt
-      updatedAt
-      owner
       device {
         id
         deliveryAgentId
         deviceType
         createdAt
         updatedAt
-        owner
       }
+      createdAt
+      updatedAt
+      deliveryAgentDeviceId
     }
   }
 `;
@@ -27,17 +26,16 @@ export const onUpdateDeliveryAgent = /* GraphQL */ `
       id
       fullName
       deliveryType
-      createdAt
-      updatedAt
-      owner
       device {
         id
         deliveryAgentId
         deviceType
         createdAt
         updatedAt
-        owner
       }
+      createdAt
+      updatedAt
+      deliveryAgentDeviceId
     }
   }
 `;
@@ -47,17 +45,16 @@ export const onDeleteDeliveryAgent = /* GraphQL */ `
       id
       fullName
       deliveryType
-      createdAt
-      updatedAt
-      owner
       device {
         id
         deliveryAgentId
         deviceType
         createdAt
         updatedAt
-        owner
       }
+      createdAt
+      updatedAt
+      deliveryAgentDeviceId
     }
   }
 `;
@@ -69,7 +66,6 @@ export const onCreateDevice = /* GraphQL */ `
       deviceType
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -81,7 +77,6 @@ export const onUpdateDevice = /* GraphQL */ `
       deviceType
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -93,7 +88,6 @@ export const onDeleteDevice = /* GraphQL */ `
       deviceType
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -101,6 +95,21 @@ export const onCreateDeliveryInfo = /* GraphQL */ `
   subscription OnCreateDeliveryInfo {
     onCreateDeliveryInfo {
       id
+      deliveryAgent {
+        id
+        fullName
+        deliveryType
+        device {
+          id
+          deliveryAgentId
+          deviceType
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+        deliveryAgentDeviceId
+      }
       geoStart {
         lat
         lng
@@ -117,23 +126,7 @@ export const onCreateDeliveryInfo = /* GraphQL */ `
       status
       createdAt
       updatedAt
-      deliveryAgent {
-        id
-        fullName
-        deliveryType
-        createdAt
-        updatedAt
-        owner
-        device {
-          id
-          deliveryAgentId
-          deviceType
-          createdAt
-          updatedAt
-          owner
-        }
-      }
-      owner
+      deliveryInfoDeliveryAgentId
     }
   }
 `;
@@ -141,6 +134,21 @@ export const onUpdateDeliveryInfo = /* GraphQL */ `
   subscription OnUpdateDeliveryInfo {
     onUpdateDeliveryInfo {
       id
+      deliveryAgent {
+        id
+        fullName
+        deliveryType
+        device {
+          id
+          deliveryAgentId
+          deviceType
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+        deliveryAgentDeviceId
+      }
       geoStart {
         lat
         lng
@@ -157,23 +165,7 @@ export const onUpdateDeliveryInfo = /* GraphQL */ `
       status
       createdAt
       updatedAt
-      deliveryAgent {
-        id
-        fullName
-        deliveryType
-        createdAt
-        updatedAt
-        owner
-        device {
-          id
-          deliveryAgentId
-          deviceType
-          createdAt
-          updatedAt
-          owner
-        }
-      }
-      owner
+      deliveryInfoDeliveryAgentId
     }
   }
 `;
@@ -181,6 +173,21 @@ export const onDeleteDeliveryInfo = /* GraphQL */ `
   subscription OnDeleteDeliveryInfo {
     onDeleteDeliveryInfo {
       id
+      deliveryAgent {
+        id
+        fullName
+        deliveryType
+        device {
+          id
+          deliveryAgentId
+          deviceType
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+        deliveryAgentDeviceId
+      }
       geoStart {
         lat
         lng
@@ -197,23 +204,7 @@ export const onDeleteDeliveryInfo = /* GraphQL */ `
       status
       createdAt
       updatedAt
-      deliveryAgent {
-        id
-        fullName
-        deliveryType
-        createdAt
-        updatedAt
-        owner
-        device {
-          id
-          deliveryAgentId
-          deviceType
-          createdAt
-          updatedAt
-          owner
-        }
-      }
-      owner
+      deliveryInfoDeliveryAgentId
     }
   }
 `;

@@ -1,0 +1,12 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "geotrack-backend"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1ulpcemqemue2"
+s3_prefix = "geotrack-backend"
+region = "us-east-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM CAPABILITY_AUTO_EXPAND CAPABILITY_NAMED_IAM"
+parameter_overrides = "ProjectName=\"geotrack\" EnvironmentName=\"main\" CorsOrigin=\"'*'\" CorsHeaders=\"'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'\" CorsMethods=\"'OPTIONS,POST'\""
+image_repositories = []

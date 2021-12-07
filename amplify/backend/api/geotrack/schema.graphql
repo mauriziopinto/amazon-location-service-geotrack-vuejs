@@ -2,19 +2,17 @@ type DeliveryAgent @model
 @auth(rules: [
   { allow:  private, provider: iam },
   { allow:  private, provider: userPools }, 
-  { allow: owner }
 ]){
   id: ID!
   fullName: String!
   deliveryType: String!
-  device: Device @connection 
+  device: Device @hasOne 
 }
 
 type Device @model 
 @auth(rules: [
   { allow:  private, provider: iam }, 
   { allow:  private, provider: userPools }, 
-  { allow: owner }
 ]){
   id: ID!
   deliveryAgentId: ID
@@ -25,10 +23,9 @@ type DeliveryInfo @model
 @auth(rules: [
   { allow:  private, provider: iam }, 
   { allow:  private, provider: userPools }, 
-  { allow: owner }
 ]){
   id: ID!
-  deliveryAgent: DeliveryAgent @connection
+  deliveryAgent: DeliveryAgent @hasOne
   geoStart: Coordinate
   geoEnd: Coordinate
   duration: Float!
