@@ -17,7 +17,7 @@
           content-style="font-size: 16px"
           :offset="[10, 10]"
         >
-          Lunch Fleet
+          Launch Fleet
         </q-tooltip>
       </q-btn> 
             
