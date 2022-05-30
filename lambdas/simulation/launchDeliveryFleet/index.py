@@ -111,6 +111,8 @@ def handler(event, context):
         method='POST',
         json={'query': graphqlQuery}
     )    
+        
+    logger.info(str(graphqlQuery))
 
     if 'data' in response.json():
       items = response.json()['data']['listDeliveryInfos']['items']
